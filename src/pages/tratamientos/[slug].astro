@@ -25,7 +25,7 @@ if (!treatment) {
     </div>
   </section>
 
-  <section class="md:pt-8 pb-24 bg-white">
+  <section class="md:pt-8 pb-24 bg-surface-100 text-ink-base">
     <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
       <div class="lg:col-span-7">
         <img src={treatment.image} alt="" class="rounded-2xl mb-8" />
@@ -46,7 +46,7 @@ if (!treatment) {
       </div>
 
       <div class="lg:col-span-5">
-        <div class="sticky top-32 p-8 bg-ink-base rounded-4xl text-white">
+        <div class="sticky top-32 p-8 bg-surface-200 border border-base-light rounded-4xl">
           <h3 class="text-2xl font-bold mb-4">Reserva tu cita</h3>
           <p class="opacity-70 mb-8">
             Agenda una evaluación personalizada en nuestra clínica de
@@ -54,9 +54,9 @@ if (!treatment) {
           </p>
           <a
             href="/contacto"
-            class="block w-full py-4 bg-primary text-center rounded-xl font-bold"
+            class="block w-full py-4 bg-primary hover:bg-primary-dark transition-colors text-ink-on-primary text-center rounded-xl font-medium"
           >
-            Contactar por WhatsApp
+            Agendar ahora
           </a>
         </div>
       </div>

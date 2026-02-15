@@ -31,15 +31,14 @@ import { allTreatments } from "@/lib/data";
         class="flex-1 basis-full md:basis-[55%] space-y-8 text-center md:text-left"
       >
         <p
-          class="inline-block px-4 py-2 rounded-full border border-base-strong bg-surface-200 text-ink-muted text-sm font-semibold tracking-wide uppercase"
+          class="inline-block px-4 py-2 rounded-full border border-base-strong bg-surface-200 text-ink-muted text-xs font-semibold tracking-widest uppercase"
         >
-          Clínica Dermatológica en Lima
+          Clínica Dermatológica <span class="text-primary-dark">en Lima</span>
         </p>
 
-        <h1
-          class="text-5xl md:text-7xl font-light text-ink-base leading-[1.1] md:leading-tight"
-        >
-          Expertos en la <span class="font-bold text-primary"
+        <h1 class="text-5xl md:text-7xl font-light text-ink-base leading-[1.1]">
+          Expertos en la <span
+            class="font-medium text-primary font-serif italic"
             >Salud y Belleza</span
           > de tu Piel
         </h1>
@@ -146,7 +145,7 @@ import { allTreatments } from "@/lib/data";
 
       <button
         id="search-button"
-        class="w-full md:w-auto bg-primary hover:bg-primary-dark text-ink-on-primary px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 group cursor-pointer"
+        class="w-full md:w-auto bg-primary hover:bg-primary-dark text-ink-on-primary px-8 py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2 group cursor-pointer"
       >
         <span>Buscar</span>
         <svg
@@ -165,21 +164,19 @@ import { allTreatments } from "@/lib/data";
     </div>
 
     <div
-      class="mt-4 flex flex-wrap gap-4 overflow-x-auto pb-2 no-scrollbar px-6 md:px-8"
+      class="mt-4 flex flex-wrap items-center gap-4 overflow-x-auto pb-2 no-scrollbar px-6 md:px-8"
     >
       <span
         class="text-xs text-ink-muted font-bold uppercase tracking-wider min-w-max"
         >Tendencias:</span
       >
-      <a href="#" class="text-xs text-primary hover:underline min-w-max"
-        >Acné juvenil</a
-      >
-      <a href="#" class="text-xs text-primary hover:underline min-w-max"
-        >Rejuvenecimiento facial</a
-      >
-      <a href="#" class="text-xs text-primary hover:underline min-w-max"
-        >Limpieza profunda</a
-      >
+      {
+        ["Láser", "Rejuvenecimiento", "Acné", "Manchas"].map((item: string) => (
+          <button class="trend-tag text-xs text-ink-muted cursor-pointer bg-primary-light/20 hover:bg-primary-light/40 min-w-max py-1 px-2 rounded-md transition-colors">
+            {item}
+          </button>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -198,18 +195,50 @@ import { allTreatments } from "@/lib/data";
   const input = document.getElementById("search-input");
   const resultsContainer = document.getElementById("search-results");
   const resultsList = resultsContainer.querySelector("ul");
+  const searchButton = document.getElementById("search-button");
+
+  function performSearch(query) {
+    const cleanQuery = query.trim();
+    if (cleanQuery.length >= 2) {
+      const results = fuse.search(cleanQuery);
+      displayResults(results);
+      resultsContainer.classList.remove("hidden");
+    } else {
+      resultsContainer.classList.add("hidden");
+    }
+  }
+
+  input.addEventListener("input", (e) => {
+    performSearch(e.target.value);
+  });
+
+  document.querySelectorAll(".trend-tag").forEach((tag) => {
+    tag.addEventListener("click", () => {
+      const query = tag.innerText.trim();
+      input.value = query;
+      performSearch(query);
+      input.focus();
+    });
+  });
+
+  searchButton.addEventListener("click", () => {
+    const firstResult = resultsList.querySelector("a");
+    if (firstResult) {
+      firstResult.click();
+    } else {
+      performSearch(input.value);
+    }
+  });
 
   function displayResults(results) {
     if (results.length > 0) {
-      resultsContainer.classList.remove("hidden");
       const limit = window.innerWidth < 768 ? 4 : 5;
-
       resultsList.innerHTML = results
         .slice(0, limit)
         .map(
           (result) => `
         <li class="border-b border-base-light last:border-none">
-          <a href="/tratamientos/${result.item.slug}" class="flex items-center gap-4 p-4 hover:bg-surface-100 transition-colors group w-full">
+          <a href="/tratamientos/${result.item.slug}" class="flex items-center gap-4 p-4 hover:bg-surface-100 transition-colors group w-full text-left">
             <div class="hidden sm:flex w-10 h-10 shrink-0 rounded-lg bg-primary/10 items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
@@ -229,33 +258,17 @@ import { allTreatments } from "@/lib/data";
       resultsList.innerHTML = `
       <div class="p-6 text-center">
         <p class="text-sm text-ink-muted mb-3">No encontramos ese tratamiento...</p>
-        <a href="https://wa.me/51999888777" class="inline-flex text-xs font-bold text-primary uppercase tracking-widest border-b border-primary pb-1">Consultar por WhatsApp</a>
+        <a href="https://wa.me/51999888777" target="_blank" class="inline-flex text-xs font-bold text-primary uppercase tracking-widest border-b border-primary pb-1">Consultar por WhatsApp</a>
       </div>`;
-      resultsContainer.classList.remove("hidden");
     }
   }
 
-  input.addEventListener("input", (e) => {
-    const query = e.target.value;
-    if (query.length >= 2) {
-      const results = fuse.search(query);
-      displayResults(results);
-    } else {
-      resultsContainer.classList.add("hidden");
-    }
-  });
-
-  document.querySelectorAll(".trend-tag").forEach((tag) => {
-    tag.addEventListener("click", () => {
-      input.value = tag.innerText;
-      const results = fuse.search(tag.innerText);
-      displayResults(results);
-      input.focus();
-    });
-  });
-
   document.addEventListener("click", (e) => {
-    if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
+    if (
+      !input.contains(e.target) &&
+      !resultsContainer.contains(e.target) &&
+      !e.target.classList.contains("trend-tag")
+    ) {
       resultsContainer.classList.add("hidden");
     }
   });
