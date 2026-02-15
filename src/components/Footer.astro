@@ -1,25 +1,27 @@
 ---
+import { allTreatments } from "@/lib/data";
+
 const phone = "+51 998-123-312";
 const currentYear = new Date().getFullYear();
+
+const dynamicTreatments = allTreatments.slice(0, 4).map((t) => ({
+  label: t.title,
+  href: `/servicios/${t.slug}`,
+}));
 
 const sections = [
   {
     title: "Clínica",
     links: [
-      { label: "Sobre el Dr. Ballesteros", href: "/sobre-mi" },
-      { label: "Nuestra Tecnología", href: "/tecnologia" },
-      { label: "Sedes en Lima", href: "/sedes" },
-      { label: "Blog de Piel", href: "/blog" },
+      { label: "¿Quiénes somos?", href: "/nosotros" },
+      { label: "Servicios", href: "/servicios" },
+      { label: "Contacto", href: "/contacto" },
+      { label: "Nuestro Blog", href: "/blog" },
     ],
   },
   {
     title: "Tratamientos",
-    links: [
-      { label: "Rejuvenecimiento Láser", href: "/tratamientos/laser" },
-      { label: "Acné y Cicatrices", href: "/tratamientos/acne" },
-      { label: "Medicina Estética", href: "/tratamientos/estetica" },
-      { label: "Dermatología Clínica", href: "/tratamientos/clinica" },
-    ],
+    links: dynamicTreatments,
   },
 ];
 ---
@@ -51,39 +53,7 @@ const sections = [
           Más de 28 años dedicados a la salud y estética de la piel en Lima,
           Perú. Ciencia y arte aplicados a tu bienestar.
         </p>
-        <div class="flex gap-4">
-          <a
-            href="#"
-            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group"
-          >
-            <svg
-              class="w-5 h-5 text-white/50 group-hover:text-white"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-              ></path></svg
-            >
-          </a>
-          <a
-            href="#"
-            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group"
-          >
-            <svg
-              class="w-5 h-5 text-white/50 group-hover:text-white"
-              width="24"
-              height="24"
-              viewBox="0 0 18 18"
-              fill="none"
-              >
-              <path
-                d="M9.00347 4.95732C6.76753 4.95732 4.96401 6.76084 4.96401 8.99678C4.96401 11.2327 6.76753 13.0362 9.00347 13.0362C11.2394 13.0362 13.0429 11.2327 13.0429 8.99678C13.0429 6.76084 11.2394 4.95732 9.00347 4.95732ZM9.00347 11.6229C7.55855 11.6229 6.37729 10.4452 6.37729 8.99678C6.37729 7.54834 7.55503 6.37061 9.00347 6.37061C10.4519 6.37061 11.6296 7.54834 11.6296 8.99678C11.6296 10.4452 10.4484 11.6229 9.00347 11.6229ZM14.1503 4.79209C14.1503 5.31592 13.7285 5.73428 13.2082 5.73428C12.6843 5.73428 12.266 5.3124 12.266 4.79209C12.266 4.27178 12.6878 3.8499 13.2082 3.8499C13.7285 3.8499 14.1503 4.27178 14.1503 4.79209ZM16.8257 5.74834C16.766 4.48623 16.4777 3.36826 15.5531 2.44717C14.632 1.52607 13.514 1.23779 12.2519 1.17451C10.9511 1.10068 7.0523 1.10068 5.75151 1.17451C4.49292 1.23428 3.37495 1.52256 2.45034 2.44365C1.52573 3.36475 1.24097 4.48271 1.17769 5.74482C1.10386 7.04561 1.10386 10.9444 1.17769 12.2452C1.23745 13.5073 1.52573 14.6253 2.45034 15.5464C3.37495 16.4675 4.4894 16.7558 5.75151 16.819C7.0523 16.8929 10.9511 16.8929 12.2519 16.819C13.514 16.7593 14.632 16.471 15.5531 15.5464C16.4742 14.6253 16.7625 13.5073 16.8257 12.2452C16.8996 10.9444 16.8996 7.04912 16.8257 5.74834ZM15.1453 13.6409C14.871 14.33 14.3402 14.8608 13.6476 15.1386C12.6105 15.5499 10.1496 15.455 9.00347 15.455C7.85737 15.455 5.39292 15.5464 4.35933 15.1386C3.67026 14.8644 3.1394 14.3335 2.86167 13.6409C2.45034 12.6038 2.54526 10.1429 2.54526 8.99678C2.54526 7.85068 2.45386 5.38623 2.86167 4.35264C3.13589 3.66357 3.66675 3.13271 4.35933 2.85498C5.39644 2.44365 7.85737 2.53857 9.00347 2.53857C10.1496 2.53857 12.614 2.44717 13.6476 2.85498C14.3367 3.1292 14.8675 3.66006 15.1453 4.35264C15.5566 5.38975 15.4617 7.85068 15.4617 8.99678C15.4617 10.1429 15.5566 12.6073 15.1453 13.6409Z"
-                fill="currentColor"></path>
-            </svg>
-          </a>
-        </div>
+        <div class="flex gap-4"></div>
       </div>
 
       {
@@ -97,7 +67,7 @@ const sections = [
                 <li>
                   <a
                     href={link.href}
-                    class="text-white/50 text-sm hover:text-primary transition-colors"
+                    class="text-white/50 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all"
                   >
                     {link.label}
                   </a>

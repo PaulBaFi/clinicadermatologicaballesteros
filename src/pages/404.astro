@@ -1,7 +1,111 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { allTreatments } from "@/lib/data";
 ---
 
-<BaseLayout title="Página no encontrada" desc="">
-  <h1>Hola</h1>
+<BaseLayout
+  title="Página no encontrada | Clínica Dermatológica"
+  desc="Lo sentimos, no pudimos encontrar la página que buscas."
+>
+  <section
+    class="min-h-screen flex items-center justify-center pt-32 pb-12 bg-surface-100 relative overflow-hidden"
+  >
+    <div
+      class="absolute top-1/4 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+    >
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10 text-center">
+      <div class="max-w-2xl mx-auto">
+        <div
+          class="mb-8 inline-flex items-center justify-center w-24 h-24 rounded-full bg-white shadow-xl shadow-primary/5 border border-base-light"
+        >
+          <span class="text-4xl -mt-1.5 font-serif italic text-primary"
+            >404</span
+          >
+        </div>
+
+        <h1
+          class="text-4xl md:text-5xl font-light text-ink-base leading-tight mb-6"
+        >
+          Parece que esta página <br />
+          <span class="font-serif italic text-primary"
+            >necesita un tratamiento</span
+          >
+        </h1>
+
+        <p class="text-lg text-ink-muted mb-12 max-w-md mx-auto">
+          Lo sentimos, el contenido que buscas no está disponible o ha cambiado
+          de lugar. Vamos a ayudarte a encontrar lo que necesitas.
+        </p>
+
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <a
+            href="/"
+            class="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-full font-medium hover:bg-primary-dark transition-all shadow-lg shadow-primary/20"
+          >
+            Volver al Inicio
+          </a>
+          <a
+            href="/contacto"
+            class="w-full sm:w-auto px-8 py-4 bg-white text-ink-base border border-base-light rounded-full font-medium hover:bg-surface-200 transition-all"
+          >
+            Agendar cita
+          </a>
+        </div>
+
+        <div class="mt-20 pt-12 border-t border-base-light/60">
+          <p
+            class="text-xs font-bold text-ink-muted uppercase tracking-[0.2em] mb-8"
+          >
+            ¿Buscabas algo específico?
+          </p>
+          <div
+            class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 max-w-3xl mx-auto"
+          >
+            {
+              allTreatments.map((t: any) => (
+                <div class="flex items-center group">
+                  <a
+                    href={`/tratamientos/${t.slug}`}
+                    class="text-sm text-ink-muted hover:text-primary transition-colors duration-300 py-1"
+                  >
+                    {t.title}
+                  </a>
+
+                  <span
+                    class="ml-4 w-1 h-1 rounded-full bg-base-light group-last:hidden"
+                    aria-hidden="true"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  section {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
