@@ -1,0 +1,27 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  desc?: string;
+}
+
+const { title, desc } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <BaseHead />
+
+    <title>{title}{title && " - "} Clínica Dermatológica Ballesteros</title>
+    <meta name="description" content={desc} />
+  </head>
+</html>
+<body>
+  <Navbar />
+  <slot />
+  <Footer />
+</body>

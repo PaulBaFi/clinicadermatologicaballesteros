@@ -1,0 +1,268 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { allTreatments, categories } from "@/lib/data";
+---
+
+<BaseLayout title="Tratamientos" desc="">
+  <section
+    class="relative pt-32 pb-20 md:pt-42 md:pb-28 overflow-hidden bg-white"
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40"
+    >
+      <div
+        class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-surface-200 rounded-full blur-[100px]"
+      >
+      </div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-base-light mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"
+            ></span>
+          </span>
+          <span
+            class="text-[10px] font-bold uppercase tracking-[0.2em] text-ink-muted"
+            >Dermatología de Vanguardia 2026</span
+          >
+        </div>
+
+        <h1
+          class="text-5xl md:text-7xl font-light text-ink-base leading-[1.1] mb-8 animate-in fade-in slide-in-from-bottom-6 duration-1000"
+        >
+          Tratamientos diseñados <br />
+          <span class="font-serif italic text-primary"
+            >para revelar tu mejor piel</span
+          >
+        </h1>
+
+        <div
+          class="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16"
+        >
+          <p
+            class="text-ink-muted text-lg md:text-xl max-w-lg leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000"
+          >
+            Desde soluciones clínicas hasta rejuvenecimiento láser avanzado. El
+            Dr. Ballesteros combina ciencia y precisión para cada necesidad
+            cutánea.
+          </p>
+
+          <div
+            class="flex gap-10 border-l border-base-light pl-8 animate-in fade-in slide-in-from-right-8 duration-1000"
+          >
+            <div>
+              <span class="block text-2xl font-bold text-ink-base">20+</span>
+              <span
+                class="text-[10px] uppercase tracking-widest text-ink-muted font-bold"
+                >Tecnologías Láser</span
+              >
+            </div>
+            <div>
+              <span class="block text-2xl font-bold text-ink-base">100%</span>
+              <span
+                class="text-[10px] uppercase tracking-widest text-ink-muted font-bold"
+                >Personalizado</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-base-light to-transparent"
+    >
+    </div>
+  </section>
+
+  <section class="py-24 bg-white" id="tratamientos-section">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+        {
+          categories.map((cat) => (
+            <button
+              data-filter={cat}
+              class:list={[
+                "filter-btn px-8 py-3 rounded-full text-sm font-bold transition-all border cursor-pointer",
+                cat === "Todos"
+                  ? "active bg-primary text-white border-primary shadow-lg shadow-primary/20"
+                  : "bg-transparent text-ink-muted border-base-light hover:border-primary hover:text-primary",
+              ]}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="treatments-grid"
+      >
+        {
+          allTreatments.map((t) => (
+            <div
+              data-category={t.category}
+              class="treatment-card group rounded-4xl bg-surface-100 border border-base-light hover:bg-white hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 animate-in fade-in zoom-in-95 overflow-hidden"
+            >
+              <div class="relative w-full aspect-5/4 overflow-hidden">
+                <img
+                  src={t.image}
+                  alt={t.title}
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div class="absolute top-6 right-6">
+                  <span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
+                    {t.category}
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-8 flex flex-col h-auto">
+                <div class="flex justify-between items-start mb-6">
+                  <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                    <svg
+                      class="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-ink-base mb-4 group-hover:text-primary transition-colors">
+                  {t.title}
+                </h3>
+
+                <p class="text-ink-muted leading-relaxed mb-8 grow line-clamp-3">
+                  {t.description}
+                </p>
+
+                <div class="space-y-6">
+                  <div class="flex flex-wrap gap-2">
+                    {t.tags.map((tag) => (
+                      <span class="text-[10px] font-bold text-ink-muted/50 uppercase tracking-wide">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={`/tratamientos/${t.slug}`}
+                    class="flex items-center justify-between w-full p-4 bg-white border border-base-light rounded-2xl group/btn hover:border-primary transition-all"
+                  >
+                    <span class="text-sm font-bold text-ink-base">
+                      Ver detalles
+                    </span>
+                    <div class="w-8 h-8 rounded-full bg-surface-200 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-white transition-all">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .treatment-card {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll(".filter-btn");
+  const cards = document.querySelectorAll(".treatment-card");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((btn) => {
+        btn.classList.remove(
+          "bg-primary",
+          "text-white",
+          "border-primary",
+          "shadow-lg",
+          "shadow-primary/20",
+          "active",
+        );
+        btn.classList.add(
+          "bg-transparent",
+          "text-ink-muted",
+          "border-base-light",
+        );
+      });
+
+      button.classList.add(
+        "bg-primary",
+        "text-white",
+        "border-primary",
+        "shadow-lg",
+        "shadow-primary/20",
+        "active",
+      );
+      button.classList.remove(
+        "bg-transparent",
+        "text-ink-muted",
+        "border-base-light",
+      );
+
+      const filter = button.getAttribute("data-filter");
+
+      cards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+
+        if (filter === "Todos" || filter === category) {
+          (card as HTMLElement).style.display = "block";
+          setTimeout(() => {
+            (card as HTMLElement).style.opacity = "1";
+            (card as HTMLElement).style.transform = "scale(1)";
+          }, 10);
+        } else {
+          (card as HTMLElement).style.opacity = "0";
+          (card as HTMLElement).style.transform = "scale(0.95)";
+          setTimeout(() => {
+            (card as HTMLElement).style.display = "none";
+          }, 300);
+        }
+      });
+    });
+  });
+</script>

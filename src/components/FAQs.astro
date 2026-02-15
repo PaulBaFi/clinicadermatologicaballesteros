@@ -1,0 +1,85 @@
+---
+import { faqs } from "@/lib/data";
+---
+
+<section class="py-24 bg-surface-200">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col lg:flex-row gap-16">
+      <div class="lg:w-1/3 space-y-6">
+        <h2 class="text-primary font-serif italic text-2xl">
+          Preguntas Frecuentes
+        </h2>
+        <h3 class="text-4xl font-light text-ink-base leading-tight">
+          Resolvemos tus <br />
+          <span class="font-bold">Dudas</span>
+        </h3>
+        <p class="text-ink-muted text-lg leading-relaxed">
+          Queremos que te sientas seguro y bien informado antes de iniciar
+          cualquier procedimiento. Si tienes más preguntas, no dudes en
+          contactarnos.
+        </p>
+        <div class="pt-4">
+          <a
+            href="https://wa.me/51998123312"
+            class="inline-flex items-center gap-2 text-primary font-bold hover:text-primary-dark transition-colors"
+          >
+            Hablar con un asesor ahora
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:w-2/3 space-y-4">
+        {
+          faqs.map((faq, index) => (
+            <details class="group bg-surface-100 rounded-3xl border border-base-light overflow-hidden transition-all duration-300 open:bg-white open:shadow-xl open:shadow-primary/5">
+              <summary class="flex items-center justify-between p-8 cursor-pointer list-none">
+                <span class="text-lg font-bold text-ink-base pr-4">
+                  {faq.question}
+                </span>
+                <div class="shrink-0 w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center text-primary group-open:rotate-180 transition-transform duration-300">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-8 pb-8">
+                <p class="text-ink-muted leading-relaxed border-t border-base-light pt-6">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Eliminar la flecha por defecto de Safari/Chrome */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

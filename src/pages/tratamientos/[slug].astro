@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const { slug } = Astro.params;
+
+import { allTreatments } from "@/lib/data";
+
+const treatment = allTreatments.find((t) => t.slug === slug);
+
+if (!treatment) {
+  return Astro.redirect("/404");
+}
+---
+
+<BaseLayout title={treatment.title} desc={treatment.description}>
+  <section class="relative pt-32 pb-16 bg-surface-100">
+    <div class="container mx-auto px-6">
+      <span class="text-primary font-bold uppercase tracking-widest text-xs">
+        {treatment.category}
+      </span>
+      <h1 class="text-5xl font-bold text-ink-base mt-4">{treatment.title}</h1>
+      <p class="text-xl text-ink-muted mt-6 max-w-2xl">
+        {treatment.description}
+      </p>
+    </div>
+  </section>
+
+  <section class="md:pt-8 pb-24 bg-white">
+    <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div class="lg:col-span-7">
+        <img src={treatment.image} alt="" class="rounded-2xl mb-8" />
+        <h2 class="text-3xl font-serif italic mb-6">Sobre el tratamiento</h2>
+        <p class="text-lg leading-relaxed text-ink-muted">
+          {treatment.fullDescription}
+        </p>
+
+        <div class="mt-12 grid md:grid-cols-2 gap-4">
+          {
+            treatment.benefits.map((b) => (
+              <div class="p-4 bg-surface-100 rounded-xl border border-base-light font-medium">
+                {b}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="sticky top-32 p-8 bg-ink-base rounded-4xl text-white">
+          <h3 class="text-2xl font-bold mb-4">Reserva tu cita</h3>
+          <p class="opacity-70 mb-8">
+            Agenda una evaluación personalizada en nuestra clínica de
+            Miraflores.
+          </p>
+          <a
+            href="/contacto"
+            class="block w-full py-4 bg-primary text-center rounded-xl font-bold"
+          >
+            Contactar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

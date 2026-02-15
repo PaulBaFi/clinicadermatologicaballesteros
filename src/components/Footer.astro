@@ -1,0 +1,178 @@
+---
+const phone = "+51 998-123-312";
+const currentYear = new Date().getFullYear();
+
+const sections = [
+  {
+    title: "Clínica",
+    links: [
+      { label: "Sobre el Dr. Ballesteros", href: "/sobre-mi" },
+      { label: "Nuestra Tecnología", href: "/tecnologia" },
+      { label: "Sedes en Lima", href: "/sedes" },
+      { label: "Blog de Piel", href: "/blog" },
+    ],
+  },
+  {
+    title: "Tratamientos",
+    links: [
+      { label: "Rejuvenecimiento Láser", href: "/tratamientos/laser" },
+      { label: "Acné y Cicatrices", href: "/tratamientos/acne" },
+      { label: "Medicina Estética", href: "/tratamientos/estetica" },
+      { label: "Dermatología Clínica", href: "/tratamientos/clinica" },
+    ],
+  },
+];
+---
+
+<footer class="bg-ink-base text-white pt-24 pb-12 overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 transition-transform hover:rotate-12">
+            <img
+              src="/favicon.png"
+              alt="Logo Ballesteros"
+              class="brightness-0 invert"
+            />
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="text-white font-bold leading-snug text-lg uppercase tracking-wider"
+              >Ballesteros</span
+            >
+            <span
+              class="text-logo font-medium text-[10px] uppercase tracking-[0.2em] leading-snug opacity-70"
+              >Clínica dermatológica</span
+            >
+          </div>
+        </div>
+        <p class="text-white/60 text-sm leading-relaxed max-w-xs">
+          Más de 28 años dedicados a la salud y estética de la piel en Lima,
+          Perú. Ciencia y arte aplicados a tu bienestar.
+        </p>
+        <div class="flex gap-4">
+          <a
+            href="#"
+            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group"
+          >
+            <svg
+              class="w-5 h-5 text-white/50 group-hover:text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group"
+          >
+            <svg
+              class="w-5 h-5 text-white/50 group-hover:text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.058-1.689-.072-4.948-.072z"
+              ></path></svg
+            >
+          </a>
+        </div>
+      </div>
+
+      {
+        sections.map((section) => (
+          <div class="space-y-6">
+            <h4 class="text-white font-bold uppercase tracking-widest text-xs">
+              {section.title}
+            </h4>
+            <ul class="space-y-4">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-white/50 text-sm hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="space-y-6">
+        <h4 class="text-white font-bold uppercase tracking-widest text-xs">
+          Contacto
+        </h4>
+        <div class="space-y-4">
+          <a
+            href={`tel:${phone.replace(/\D/g, "")}`}
+            class="flex items-center gap-3 group"
+          >
+            <div
+              class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path></svg
+              >
+            </div>
+            <span class="text-white/60 text-sm group-hover:text-white"
+              >{phone}</span
+            >
+          </a>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-primary"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path></svg
+              >
+            </div>
+            <span class="text-white/60 text-sm italic">Miraflores, Lima.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6"
+    >
+      <p class="text-[10px] text-white/30 uppercase tracking-[0.2em]">
+        © {currentYear} Dr. José Luis Ballesteros. Todos los derechos reservados.
+      </p>
+      <div class="flex gap-8">
+        <a
+          href="/legal"
+          class="text-[10px] text-white/30 uppercase tracking-[0.2em] hover:text-white transition-colors"
+          >Políticas de Privacidad</a
+        >
+        <a
+          href="/cookies"
+          class="text-[10px] text-white/30 uppercase tracking-[0.2em] hover:text-white transition-colors"
+          >Términos y condiciones</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>

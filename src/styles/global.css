@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8bba42;
+  --color-primary-dark: #769f38;
+  --color-primary-light: #a4cc66;
+
+  --color-logo: #bdbdbd;
+
+  --color-surface-100: #ffffff;
+  --color-surface-200: #f9fafb;
+  --color-surface-300: #f3f4f6;
+  --color-surface-dark: #1f2937;
+
+  --color-ink-base: #1a1a1a;
+  --color-ink-muted: #4b5563;
+  --color-ink-on-primary: #ffffff;
+
+  --color-base-light: #e5e7eb;
+  --color-base-strong: #bdbdbd;
+}
+
+@layer {
+  body {
+    @apply bg-surface-200 text-ink-base;
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
