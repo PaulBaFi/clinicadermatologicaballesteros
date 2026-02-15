@@ -214,9 +214,9 @@ import { allTreatments } from "@/lib/data";
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <div class="flex flex-col gap-1 flex-1">
-              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                <span class="text-[9px] text-primary w-fit font-bold uppercase tracking-tighter px-2 py-0.5 rounded-md bg-primary/10 shrink-0 italic">${result.item.category || "Médico"}</span>  
+              <div class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-2">
                 <span class="font-bold text-ink-base text-sm line-clamp-1">${result.item.title}</span>
+                <span class="text-[9px] text-primary w-fit font-bold uppercase tracking-tighter px-2 py-0.5 rounded-md bg-primary/10 shrink-0 italic">${result.item.category || "Médico"}</span>  
               </div>
               <span class="text-[11px] text-ink-muted line-clamp-1 italic">${result.item.description || "Ver detalles del tratamiento"}</span>
             </div>
